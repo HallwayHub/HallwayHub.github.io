@@ -14,19 +14,19 @@
 
     header {
       text-align: center;
-      padding: 30px 10px;
+      padding: 25px 10px;
       background: #ffffff;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
     h1 {
       margin: 0;
-      font-size: 2.2rem;
+      font-size: 2rem;
       font-weight: 700;
     }
 
     #search {
-      margin-top: 20px;
+      margin-top: 15px;
       width: 90%;
       max-width: 500px;
       padding: 12px 15px;
@@ -42,6 +42,36 @@
       box-shadow: 0 0 5px rgba(106,166,255,0.5);
     }
 
+    /* CATEGORY BAR */
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px;
+      background: #ffffff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .cat {
+      padding: 8px 15px;
+      background: #e8ecf5;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 0.9rem;
+    }
+
+    .cat:hover {
+      background: #d6def0;
+    }
+
+    .cat.active {
+      background: #6aa6ff;
+      color: white;
+    }
+
+    /* GAME GRID */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -78,10 +108,24 @@
   <input id="search" type="text" placeholder="Search games...">
 </header>
 
+<!-- CATEGORY BAR -->
+<div class="categories">
+  <div class="cat active" data-cat="all">All</div>
+  <div class="cat" data-cat="action">Action</div>
+  <div class="cat" data-cat="racing">Racing</div>
+  <div class="cat" data-cat="puzzle">Puzzle</div>
+  <div class="cat" data-cat="sports">Sports</div>
+  <div class="cat" data-cat="arcade">Arcade</div>
+  <div class="cat" data-cat="platformer">Platformer</div>
+  <div class="cat" data-cat="io">IO Games</div>
+  <div class="cat" data-cat="idle">Idle / Clicker</div>
+  <div class="cat" data-cat="adventure">Adventure</div>
+</div>
+
 <div class="grid" id="games"></div>
 
 <script>
-  // Raw HTML list you provided
+  // Your raw list goes here
   const raw = `
       <a href="games/bob-the-robber-2/"><img src="images/bob-the-robber-2.png" alt="Bob the Robber 2"></a>
 <a href="games/vex7/"><img src="images/vex7.jpeg" alt="Vex 7"></a>
@@ -158,13 +202,13 @@
   `;
 
   const container = document.getElementById("games");
-
   const temp = document.createElement("div");
   temp.innerHTML = raw.trim();
 
   [...temp.children].forEach(a => {
     const img = a.querySelector("img");
     const alt = img.alt;
+    const category = a.getAttribute("data-cat");
 
     let href = a.getAttribute("href");
     let src = img.getAttribute("src");
@@ -185,6 +229,7 @@
 
     const card = document.createElement("div");
     card.className = "game";
+    card.setAttribute("data-cat", category);
     card.onclick = () => {
       window.location.href = "embed.html?game=" + encodeURIComponent(href);
     };
@@ -197,13 +242,31 @@
     container.appendChild(card);
   });
 
-  // Search bar
+  // SEARCH
   const search = document.getElementById("search");
   search.addEventListener("input", () => {
     const term = search.value.toLowerCase();
     document.querySelectorAll(".game").forEach(card => {
       const alt = card.querySelector("img").alt.toLowerCase();
       card.style.display = alt.includes(term) ? "block" : "none";
+    });
+  });
+
+  // CATEGORY FILTER
+  document.querySelectorAll(".cat").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".cat").forEach(c => c.classList.remove("active"));
+      btn.classList.add("active");
+
+      const cat = btn.dataset.cat;
+
+      document.querySelectorAll(".game").forEach(game => {
+        if (cat === "all" || game.dataset.cat === cat) {
+          game.style.display = "block";
+        } else {
+          game.style.display = "none";
+        }
+      });
     });
   });
 </script>
