@@ -54,7 +54,7 @@ function openGame() {
   const gameURL = params.get("game");
   if (!gameURL) return;
 
-  // Open popup
+  // Open popup window
   const win = window.open("", "_blank");
 
   // Clean blank page
@@ -63,7 +63,7 @@ function openGame() {
   win.document.documentElement.style.margin = "0";
   win.document.documentElement.style.padding = "0";
 
-  // Force proper viewport on iPad
+  // Fix viewport on iPad
   const meta = win.document.createElement("meta");
   meta.name = "viewport";
   meta.content = "width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover";
@@ -73,7 +73,7 @@ function openGame() {
   const iframe = win.document.createElement("iframe");
   iframe.src = gameURL;
 
-  // PERFECT SCALING FIX
+  // Perfect scaling on ALL devices
   iframe.style.position = "fixed";
   iframe.style.top = "0";
   iframe.style.left = "0";
