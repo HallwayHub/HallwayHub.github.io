@@ -26,11 +26,6 @@
       z-index: 9999;
     }
 
-    #back:hover {
-      background: #6af7ff;
-      box-shadow: 0 0 20px #6af7ff;
-    }
-
     #open {
       position: fixed;
       top: 50%;
@@ -57,28 +52,44 @@
 function openGame() {
   const params = new URLSearchParams(window.location.search);
   const gameURL = params.get("game");
-
   if (!gameURL) return;
 
-  // Open blank popup
-  var win = window.open("", "_blank");
+  // Open popup
+  const win = window.open("", "_blank");
 
-  // Create iframe inside popup
-  var iframe = win.document.createElement("iframe");
-  iframe.style.width = "100%";
-  iframe.style.height = "100%";
-  iframe.style.border = "none";
-  iframe.src = gameURL;
-
-  // Remove margins in popup
+  // Clean blank page
   win.document.body.style.margin = "0";
   win.document.body.style.padding = "0";
+  win.document.documentElement.style.margin = "0";
+  win.document.documentElement.style.padding = "0";
 
-  // Set stealth title
-  win.document.title = "Audio Book";
+  // Force proper viewport on iPad
+  const meta = win.document.createElement("meta");
+  meta.name = "viewport";
+  meta.content = "width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover";
+  win.document.head.appendChild(meta);
+
+  // Create iframe
+  const iframe = win.document.createElement("iframe");
+  iframe.src = gameURL;
+
+  // PERFECT SCALING FIX
+  iframe.style.position = "fixed";
+  iframe.style.top = "0";
+  iframe.style.left = "0";
+  iframe.style.width = "100vw";
+  iframe.style.height = "100vh";
+  iframe.style.border = "none";
+
+  // Prevent Safari zoom/crop
+  iframe.style.transform = "translateZ(0)";
+  iframe.style.webkitTransform = "translateZ(0)";
 
   // Append iframe
   win.document.body.appendChild(iframe);
+
+  // Stealth title
+  win.document.title = "Audio Book";
 }
 </script>
 
