@@ -186,7 +186,7 @@
 <div id="motd">
   <div id="motd-box">
     <h2>Message of the Day</h2>
-    <p id="motd-text">Welcome back to Hallway Hub — now with neon mode.</p>
+    <p id="motd-text">Loading message...</p>
     <button id="motd-close">Close</button>
   </div>
 </div>
@@ -383,11 +383,7 @@
     });
   });
 
-  // MOTD LOGIC
-  document.getElementById("motd-close").onclick = () => {
-    document.getElementById("motd").style.display = "none";
-  };
-
+  // MOTD LOGIC — ALWAYS RANDOM ON LOAD
   const messages = [
     "Marcel would choose his saxophone over amanda",
     "Are We Deadass!!",
@@ -396,8 +392,15 @@
     "More updates coming soon"
   ];
 
-  document.getElementById("motd-text").innerText =
-    messages[Math.floor(Math.random() * messages.length)];
+  window.addEventListener("load", () => {
+    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+    document.getElementById("motd-text").innerText = randomMessage;
+    document.getElementById("motd").style.display = "flex";
+  });
+
+  document.getElementById("motd-close").onclick = () => {
+    document.getElementById("motd").style.display = "none";
+  };
 </script>
 
 </body>
