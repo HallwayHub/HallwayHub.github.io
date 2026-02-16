@@ -1,184 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Campus Tech Lab</title>
+<meta charset="UTF-8">
+<title>Campus Tech Lab</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0a0f1f;
-      color: #e0e6ff;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0a0f1f;
+  color: #e0e6ff;
+}
 
-    header {
-      text-align: center;
-      padding: 25px 10px;
-      background: #0d1228;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-      border-bottom: 2px solid rgba(0,255,255,0.3);
-    }
+header {
+  text-align: center;
+  padding: 25px 10px;
+  background: #0d1228;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+  border-bottom: 2px solid rgba(0,255,255,0.3);
+}
 
-    h1 {
-      margin: 0;
-      font-size: 2.4rem;
-      font-weight: 700;
-      color: #6af7ff;
-      text-shadow: 0 0 10px #00eaff;
-    }
+h1 {
+  margin: 0;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #6af7ff;
+  text-shadow: 0 0 10px #00eaff;
+}
 
-    #search {
-      margin-top: 15px;
-      width: 90%;
-      max-width: 500px;
-      padding: 12px 15px;
-      font-size: 1rem;
-      border-radius: 8px;
-      border: 2px solid #00eaff;
-      background: #0a0f1f;
-      color: #e0e6ff;
-      outline: none;
-      transition: 0.2s;
-      box-shadow: 0 0 10px rgba(0,255,255,0.3);
-    }
+#search {
+  margin-top: 15px;
+  width: 90%;
+  max-width: 500px;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 2px solid #00eaff;
+  background: #0a0f1f;
+  color: #e0e6ff;
+  outline: none;
+  transition: 0.2s;
+  box-shadow: 0 0 10px rgba(0,255,255,0.3);
+}
 
-    #search:focus {
-      border-color: #6af7ff;
-      box-shadow: 0 0 15px rgba(0,255,255,0.6);
-    }
+#search:focus {
+  border-color: #6af7ff;
+  box-shadow: 0 0 15px rgba(0,255,255,0.6);
+}
 
-    /* CATEGORY BAR */
-    .categories {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      padding: 15px;
-      background: #0d1228;
-      border-bottom: 2px solid rgba(0,255,255,0.2);
-    }
+/* CATEGORY BAR */
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  padding: 15px;
+  background: #0d1228;
+  border-bottom: 2px solid rgba(0,255,255,0.2);
+}
 
-    .cat {
-      padding: 8px 18px;
-      background: #0a0f1f;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: 0.2s;
-      font-size: 0.9rem;
-      border: 2px solid #00eaff;
-      color: #6af7ff;
-      text-shadow: 0 0 6px #00eaff;
-      box-shadow: 0 0 10px rgba(0,255,255,0.3);
-    }
+.cat {
+  padding: 8px 18px;
+  background: #0a0f1f;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 0.9rem;
+  border: 2px solid #00eaff;
+  color: #6af7ff;
+  text-shadow: 0 0 6px #00eaff;
+  box-shadow: 0 0 10px rgba(0,255,255,0.3);
+}
 
-    .cat:hover {
-      background: #001a26;
-      box-shadow: 0 0 15px rgba(0,255,255,0.6);
-    }
+.cat:hover {
+  background: #001a26;
+  box-shadow: 0 0 15px rgba(0,255,255,0.6);
+}
 
-    .cat.active {
-      background: #00eaff;
-      color: #000;
-      text-shadow: none;
-      box-shadow: 0 0 20px #00eaff;
-    }
+.cat.active {
+  background: #00eaff;
+  color: #000;
+  text-shadow: none;
+  box-shadow: 0 0 20px #00eaff;
+}
 
-    /* GAME GRID */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 20px;
-      padding: 25px;
-    }
+/* GAME GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+  padding: 25px;
+}
 
-    .game {
-      background: #0d1228;
-      border-radius: 12px;
-      padding: 10px;
-      text-align: center;
-      box-shadow: 0 0 15px rgba(0,255,255,0.2);
-      transition: 0.25s;
-      cursor: pointer;
-      border: 2px solid rgba(0,255,255,0.3);
-    }
+.game {
+  background: #0d1228;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0,255,255,0.2);
+  transition: 0.25s;
+  cursor: pointer;
+  border: 2px solid rgba(0,255,255,0.3);
+}
 
-    .game:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 25px rgba(0,255,255,0.8);
-      border-color: #00eaff;
-    }
+.game:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 25px rgba(0,255,255,0.8);
+  border-color: #00eaff;
+}
 
-    .game img {
-      width: 100%;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 10px;
-      box-shadow: 0 0 12px rgba(0,255,255,0.4);
-    }
+.game img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0,255,255,0.4);
+}
 
-    /* MOTD POPUP */
-    #motd {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 99999;
-    }
+/* MOTD POPUP */
+#motd {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
 
-    #motd-box {
-      background: #0d1228;
-      padding: 25px;
-      width: 90%;
-      max-width: 400px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 0 25px rgba(0,255,255,0.6);
-      border: 2px solid #00eaff;
-      animation: pop 0.25s ease-out;
-    }
+#motd-box {
+  background: #0d1228;
+  padding: 25px;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(0,255,255,0.6);
+  border: 2px solid #00eaff;
+  animation: pop 0.25s ease-out;
+}
 
-    #motd-box h2 {
-      margin-top: 0;
-      font-size: 1.6rem;
-      color: #6af7ff;
-      text-shadow: 0 0 10px #00eaff;
-    }
+#motd-box h2 {
+  margin-top: 0;
+  font-size: 1.6rem;
+  color: #6af7ff;
+  text-shadow: 0 0 10px #00eaff;
+}
 
-    #motd-text {
-      color: #e0e6ff;
-      font-size: 1rem;
-    }
+#motd-text {
+  color: #e0e6ff;
+  font-size: 1rem;
+}
 
-    #motd-close {
-      margin-top: 15px;
-      padding: 10px 20px;
-      background: #00eaff;
-      border: none;
-      color: #000;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: bold;
-      box-shadow: 0 0 15px #00eaff;
-      transition: 0.2s;
-    }
+/* MOTD IMAGE */
+#motd-img {
+  display: none;
+  max-width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+  box-shadow: 0 0 15px #00eaff;
+}
 
-    #motd-close:hover {
-      background: #6af7ff;
-      box-shadow: 0 0 25px #6af7ff;
-    }
+#motd-close {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #00eaff;
+  border: none;
+  color: #000;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 0 15px #00eaff;
+  transition: 0.2s;
+}
 
-    @keyframes pop {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-  </style>
+#motd-close:hover {
+  background: #6af7ff;
+  box-shadow: 0 0 25px #6af7ff;
+}
+
+@keyframes pop {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+</style>
 </head>
 <body>
 
@@ -186,7 +195,8 @@
 <div id="motd">
   <div id="motd-box">
     <h2>Message of the Day</h2>
-    <p id="motd-text">Loading message...</p>
+    <p id="motd-text"></p>
+    <img id="motd-img">
     <button id="motd-close">Close</button>
   </div>
 </div>
@@ -213,9 +223,9 @@
 <div class="grid" id="games"></div>
 
 <script>
-  // You will paste your game list here
-  const raw = `
-  <a href="games/bob-the-robber-2/" data-cat="adventure"><img src="images/bob-the-robber-2.png" alt="Bob the Robber 2"></a>
+// You will paste your game list here
+const raw = `
+<a href="games/bob-the-robber-2/" data-cat="adventure"><img src="images/bob-the-robber-2.png" alt="Bob the Robber 2"></a>
 <a href="games/vex7/" data-cat="platformer"><img src="images/vex7.jpeg" alt="Vex 7"></a>
 <a href="games/vex6/" data-cat="platformer"><img src="images/vex6.jpeg" alt="Vex 6"></a>
 <a href="games/minecraft/" data-cat="adventure"><img src="images/mc.png" alt="Minecraft"></a>
@@ -339,96 +349,109 @@
 <a href="/cars" data-cat="sports"><img src="/cars/icon.png" alt="Bumper Cars Soccer"></a>
 <a href="/curve" data-cat="arcade"><img src="/curve/icon.jpg" alt="Curve Ball 3D"></a>
 
+`;
 
-  `;
+const container = document.getElementById("games");
+const temp = document.createElement("div");
+temp.innerHTML = raw.trim();
 
-  const container = document.getElementById("games");
-  const temp = document.createElement("div");
-  temp.innerHTML = raw.trim();
+[...temp.children].forEach(a => {
+  const img = a.querySelector("img");
+  const alt = img.alt;
+  const category = a.getAttribute("data-cat");
 
-  [...temp.children].forEach(a => {
-    const img = a.querySelector("img");
-    const alt = img.alt;
-    const category = a.getAttribute("data-cat");
+  let href = a.getAttribute("href");
+  let src = img.getAttribute("src");
 
-    let href = a.getAttribute("href");
-    let src = img.getAttribute("src");
+  if (href.startsWith("/")) {
+    href = "https://educational-moyv.github.io" + href;
+  } else {
+    href = "https://educational-moyv.github.io/shiv/" + href;
+  }
 
-    // Apply your rule to href
-    if (href.startsWith("/")) {
-      href = "https://educational-moyv.github.io" + href;
-    } else {
-      href = "https://educational-moyv.github.io/shiv/" + href;
-    }
+  if (src.startsWith("/")) {
+    src = "https://educational-moyv.github.io" + src;
+  } else {
+    src = "https://educational-moyv.github.io/shiv/" + src;
+  }
 
-    // Apply your rule to image src
-    if (src.startsWith("/")) {
-      src = "https://educational-moyv.github.io" + src;
-    } else {
-      src = "https://educational-moyv.github.io/shiv/" + src;
-    }
-
-    const card = document.createElement("div");
-    card.className = "game";
-    card.setAttribute("data-cat", category);
-    card.onclick = () => {
-      window.location.href = "player.html?game=" + encodeURIComponent(href);
-    };
-
-    const newImg = document.createElement("img");
-    newImg.src = src;
-    newImg.alt = alt;
-
-    card.appendChild(newImg);
-    container.appendChild(card);
-  });
-
-  // SEARCH
-  const search = document.getElementById("search");
-  search.addEventListener("input", () => {
-    const term = search.value.toLowerCase();
-    document.querySelectorAll(".game").forEach(card => {
-      const alt = card.querySelector("img").alt.toLowerCase();
-      card.style.display = alt.includes(term) ? "block" : "none";
-    });
-  });
-
-  // CATEGORY FILTER
-  document.querySelectorAll(".cat").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".cat").forEach(c => c.classList.remove("active"));
-      btn.classList.add("active");
-
-      const cat = btn.dataset.cat;
-
-      document.querySelectorAll(".game").forEach(game => {
-        if (cat === "all" || game.dataset.cat === cat) {
-          game.style.display = "block";
-        } else {
-          game.style.display = "none";
-        }
-      });
-    });
-  });
-
-  // MOTD LOGIC — ALWAYS RANDOM ON LOAD
-  const messages = [
-    "Marcel would choose his saxophone over amanda",
-    "Are We Deadass!!",
-    "chris🤷joey",
-    "don't let alanis tell my sister about this site again.",
-    "More updates coming soon"
-  ];
-
-  window.addEventListener("load", () => {
-    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-    document.getElementById("motd-text").innerText = randomMessage;
-    document.getElementById("motd").style.display = "flex";
-  });
-
-  document.getElementById("motd-close").onclick = () => {
-    document.getElementById("motd").style.display = "none";
+  const card = document.createElement("div");
+  card.className = "game";
+  card.setAttribute("data-cat", category);
+  card.onclick = () => {
+    window.location.href = "player.html?game=" + encodeURIComponent(href);
   };
+
+  const newImg = document.createElement("img");
+  newImg.src = src;
+  newImg.alt = alt;
+
+  card.appendChild(newImg);
+  container.appendChild(card);
+});
+
+// SEARCH
+const search = document.getElementById("search");
+search.addEventListener("input", () => {
+  const term = search.value.toLowerCase();
+  document.querySelectorAll(".game").forEach(card => {
+    const alt = card.querySelector("img").alt.toLowerCase();
+    card.style.display = alt.includes(term) ? "block" : "none";
+  });
+});
+
+// CATEGORY FILTER
+document.querySelectorAll(".cat").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".cat").forEach(c => c.classList.remove("active"));
+    btn.classList.add("active");
+
+    const cat = btn.dataset.cat;
+
+    document.querySelectorAll(".game").forEach(game => {
+      if (cat === "all" || game.dataset.cat === cat) {
+        game.style.display = "block";
+      } else {
+        game.style.display = "none";
+      }
+    });
+  });
+});
+
+// MOTD WITH IMAGE SUPPORT
+const messages = [
+  { text: "Marcel would choose his saxophone over amanda" },
+  { text: "Are We Deadass!!" },
+  { text: "chris🤷joey" },
+  { text: "don't let alanis tell my sister about this site again." },
+  { text: "More updates coming soon" },
+
+  // Image example
+  { 
+    text: "Vyon is watching you 👀",
+    img: "/images/vyon.jpg"
+  }
+];
+
+window.addEventListener("load", () => {
+  const msg = messages[Math.floor(Math.random() * messages.length)];
+
+  document.getElementById("motd-text").innerText = msg.text || "";
+
+  const imgEl = document.getElementById("motd-img");
+  if (msg.img) {
+    imgEl.src = msg.img;
+    imgEl.style.display = "block";
+  } else {
+    imgEl.style.display = "none";
+  }
+
+  document.getElementById("motd").style.display = "flex";
+});
+
+document.getElementById("motd-close").onclick = () => {
+  document.getElementById("motd").style.display = "none";
+};
 </script>
 
 </body>
